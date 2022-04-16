@@ -10,7 +10,8 @@ defmodule WebhookProcessor.Application do
       Plug.Cowboy.child_spec(
         scheme: :http,
         plug: WebhookProcessor.Endpoint,
-        options: [port: 4001]
+        # Set the port per environment, see ./config/MIX_ENV.exs
+        options: [port: Application.get_env(:webhook_processor, :port)]
       )
     ]
     # See https://hexdocs.pm/elixir/Supervisor.html
